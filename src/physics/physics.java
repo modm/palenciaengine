@@ -1,9 +1,11 @@
+package physics;
+
 import java.awt.Color;
 import java.awt.Component;
 
 public class Physics {
 	
-	 private int mRadioBola = 5;
+		private int mRadioBola = 5;
 	    private float mX = 0;
 	    private float mY = 0;
 	    private double mVY = 0 ;
