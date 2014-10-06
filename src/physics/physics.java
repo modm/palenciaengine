@@ -1,117 +1,184 @@
 package physics;
 
-import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 
 public class Physics {
-	
-		private int mRadioBola = 5;
-	    private float mX = 0;
-	    private float mY = 0;
-	    private double mVY = 0 ;
-	    private double mAY = .9 ;    
-	    private double mVX = 1 ;
-	    private int mH = 100;
-	    private Component mArea = null;    
-	    private int mDireccion = 1 ; // cayendo
-	    private boolean mFin = false;
-	    private boolean mOutOfArea = false;
-	    private double mK = 0.1; 
-	    
-	    public float getmX() {
-			return mX;
-		}
-		public void setmX(float mX) {
-			this.mX = mX;
-		}
-		public float getmY() {
-			return mY;
-		}
-		public void setmY(float mY) {
-			this.mY = mY;
-		}
-		public double getmVY() {
-			return mVY;
-		}
-		public void setmVY(double mVY) {
-			this.mVY = mVY;
-		}
-		public double getmAY() {
-			return mAY;
-		}
-		public void setmAY(double mAY) {
-			this.mAY = mAY;
-		}
-		public double getmVX() {
-			return mVX;
-		}
-		public void setmVX(double mVX) {
-			this.mVX = mVX;
-		}
-		public int getmH() {
-			return mH;
-		}
-		public void setmH(int mH) {
-			this.mH = mH;
-		}
-		public boolean ismFin() {
-			return mFin;
-		}
-		public void setmFin(boolean mFin) {
-			this.mFin = mFin;
-		}
-		public boolean ismOutOfArea() {
-			return mOutOfArea;
-		}
-		public void setmOutOfArea(boolean mOutOfArea) {
-			this.mOutOfArea = mOutOfArea;
-		}
-		
-		public float Fall(float posY,float aceY){
-			
-			float x= posY-=aceY;
-			return x;
-		}
-		
-		
-		public double Break(float VelY){
-			
-			double delta=(double)VelY*mK;
-			double newVY = VelY - (delta+0.01) ;
-			return newVY;
-		}
-		
-		public boolean CheckEnd(double check){
-			if(check<0.1){
-			boolean x=true;
-			return x;
-			}else{
-				return false;
-			}
-			
-		}
-		
-		public int CheckFall(float posY,float posCenter){
-			if(posY<posCenter){
-			return 2;
-		
-			}else{
-				return 1;
-			}
-			
-		}
-		
-		public float UP(float posY,float aceY){
-			float x=posY += aceY;
-			return x;
-			
-		}
-		
-		public float LoseSpeed(float aceY,float velY){
-			float x=velY -= aceY;
-			return x;
-			
-		}
-	    
-	    
+    
+    private int radio = 5;
+    
+    private float mX = 0;
+    
+    private float mY = 0;
+        
+    private double mVY = 0 ;
+    
+    private double mAY = 0.15 ;    
+    
+    private double mVX = 1 ;
+    
+    private int mH = 100;    
+    
+    private Component mArea = null;    
+    
+    private int mDireccion = 1 ; // cayendo
+    
+    private boolean mFin = false;
+    
+    private boolean mOutOfArea = false;
+    
+    private double mK = 0.1; 
+    
+    public Physics() {
+     
+    }
+    
+    public void actualizarEstado() {
+      
+      if( mFin || mOutOfArea )          
+      {
+          return;
+      }
+      
+      //mX += mVX ;
+      
+      if( mDireccion == 1 )                  {
+          
+          mY -= mVY;
+                    
+          if( mY < radio*2 ) {
+              
+              //mY = 0 ;
+              
+              mDireccion = 2;
+              
+              double delta = mVY * mK ; 
+              
+              System.out.println("Delta -" + delta );
+              
+              System.out.println("VY " + mVY );
+              
+              double newVY = mVY - (delta+0.01) ;
+              
+              if( delta < 0.1 ) {
+                    //mFin = true;
+            	  
+              }
+              
+              System.out.println("NEW VY " + newVY );
+              
+              mVY = (float)newVY;
+                          
+          } else {
+              mVY += mAY;
+          }
+          
+      } else if( mDireccion == 2 ) {
+          
+          //mY += mVY;
+          
+          mVY -= mAY;
+          
+          if( mVY < 0 ) {
+          
+            mVY = 0;
+            
+            mDireccion = 1; 
+              
+          }
+          
+      }
+          
+    }   
+
+    public void setRadio(int radio) {
+        this.radio = radio;
+    }
+
+    public int getRadio() {
+        return Radio;
+    }
+
+    public int getX() {
+        return (int)mX;
+    }
+    
+    public void setX(float x){
+    	this.mX = x;
+    }
+
+    public int getY() {
+        return (int)mY;
+    }
+    public void setY(float y){
+    	this.mY=y;
+    }
+
+    public void setArea(Component mArea) {
+        this.mArea = mArea;
+    }
+
+    public Component getArea() {
+        return mArea;
+    }
+
+    public void setH(int mH) {
+        this.mY = mH;
+        this.mH = mH;
+    }
+
+    public int getH() {
+        return mH;
+    }
+
+    public void setVY(double mVY) {
+        this.mVY = mVY;
+    }
+
+    public double getVY() {
+        return mVY;
+    }
+
+    public void setAY(double mAY) {
+        this.mAY = mAY;
+    }
+
+    public double getAY() {
+        return mAY;
+    }
+
+    public void setVX(double mVX) {
+        this.mVX = mVX;
+    }
+
+    public double getVX() {
+        return mVX;
+    }
+
+    public boolean isOutOfArea() {
+        return mOutOfArea || mFin ;
+    }
+
+    public void setK(double mK) {
+        this.mK = mK;
+    }
+
+    public double getK() {
+        return mK;
+    }
+    
+    public void jump()
+    {
+    	setY(getY()+3);
+    }
+   
+    public void moveLeft()
+    {
+    	setX(getX() -1);
+    }
+  
+    public void moveRight(){
+    	setX(getX() +1);
+    }
+    
 }
