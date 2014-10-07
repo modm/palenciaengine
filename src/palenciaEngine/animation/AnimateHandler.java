@@ -47,6 +47,24 @@ public class AnimateHandler {
         return nspr;
     }
 
+    public int playJumping(double velX, double velY, int dir) {
+        if(dir == 0) {
+            if(nspr == 0) nspr = 1;
+            else if(nspr == 1) nspr = 2;
+            else if(nspr == 2) nspr = 3;
+            else if(nspr == 3) nspr = 1;
+            if(velX == 0 && velY == 0) nspr = 0;
+        } else {
+            if(nspr == 4) nspr = 5;
+            else if(nspr == 5) nspr = 6;
+            else if(nspr == 6) nspr = 7;
+            else if(nspr == 7) nspr = 5;
+            if(velX == 0 && velY == 0) nspr = 4;
+        }
+
+        return nspr;
+    }
+
     public int getNspr() {
         return nspr;
     }

@@ -18,9 +18,18 @@ public class PhysicsHandler {
     private boolean mFin = false;
     private boolean mOutOfArea = false;
     private double mK = 0.1;
+    private boolean jumping = false;
 
     public PhysicsHandler(){
 
+    }
+
+    public boolean isJumping() {
+        return jumping;
+    }
+
+    public void setJumping(boolean jumping) {
+        this.jumping = jumping;
     }
 
     public int getDir() {
@@ -37,30 +46,36 @@ public class PhysicsHandler {
     public void setmX(float mX) {
         this.mX = mX;
     }
+
     public float getmY() {
         return mY;
     }
     public void setmY(float mY) {
         this.mY = mY;
     }
+
     public double getmVY() {
         return mVY;
     }
     public void setmVY(double mVY) {
         this.mVY = mVY;
     }
+
     public double getmAY() {
         return mAY;
     }
     public void setmAY(double mAY) {
         this.mAY = mAY;
     }
+
     public double getmVX() {
         return mVX;
     }
+
     public void setmVX(double mVX) {
         this.mVX = mVX;
     }
+
     public int getmH() {
         return mH;
     }
